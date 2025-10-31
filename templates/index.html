@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spam X — Unified Spam Detection</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: #fff;
+            width: 470px;
+            padding: 35px 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+        h2 {
+            color: #0078D7;
+            margin-bottom: 20px;
+            font-size: 1.7em;
+            letter-spacing: 0.5px;
+        }
+        select, textarea {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 15px;
+            margin-top: 10px;
+            outline: none;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+        select:focus, textarea:focus {
+            border-color: #0078D7;
+            box-shadow: 0 0 5px rgba(0,120,215,0.3);
+        }
+        textarea {
+            height: 130px;
+            resize: none;
+        }
+        button {
+            margin-top: 18px;
+            width: 100%;
+            padding: 12px;
+            background: #0078D7;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+        }
+        button:hover { background: #005fa3; }
+        button:active { transform: scale(0.98); }
+
+        .result {
+            margin-top: 20px;
+            font-size: 19px;
+            font-weight: bold;
+            color: #333;
+            background: #f1f9ff;
+            border-left: 6px solid #0078D7;
+            border-radius: 10px;
+            padding: 10px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📡 Spam X — Unified Spam Detection</h2>
+        <form action="/predict" method="post">
+            <select name="source" required>
+                <option value="">Select Message Source</option>
+                <option value="Normal">💌 Normal Message</option>
+                <option value="Email">📧 Email</option>
+                <option value="Instagram">📱 Instagram DM</option>
+                <option value="Feedback">💬 Customer Feedback</option>
+                <option value="WhatsApp">🟢 WhatsApp Message</option>
+            </select>
+            <textarea name="message" placeholder="Type or paste your message here..." required></textarea>
+            <button type="submit">🚀 Detect Spam</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                <p><b>Source:</b> {{ source }}</p>
+                <p>{{ prediction }}</p>
+            </div>
+        {% endif %}
+
+        <div class="footer">© 2025 Spam X | AI Spam Detection Platform</div>
+    </div>
+</body>
+</html>
